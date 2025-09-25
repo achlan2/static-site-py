@@ -20,10 +20,53 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                     res.append(TextNode(s_text[i], old_node.text_type))
     return res
 
+image_regex = r"!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)"
+link_regex = r"\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)"
+
+def split_nodes_image(old_nodes):
+    res = []
+    for old_node in old_nodes:
+        matches = extract_markdown_images(old_node.text)
+        if not matches:
+            res.append(old_node)
+        else:
+            o = old_node.text
+            i = 0
+            for e in matches:
+                search = f"![{e[0]}]({e[1]})"
+                splitted = o.split(search)
+                if splitted[0] != '':
+                    res.append(TextNode(splitted[0], old_node.text_type))
+                res.append(TextNode(e[0], TextType.IMAGE, e[1]))
+                o = splitted[-1]
+            if o:
+                res.append(TextNode(o, old_node.text_type))
+    return res
+
+def split_nodes_link(old_nodes):
+    res = []
+    for old_node in old_nodes:
+        matches = extract_markdown_links(old_node.text)
+        if not matches:
+            res.append(old_node)
+        else:
+            o = old_node.text
+
+            for e in matches:
+                search = f"[{e[0]}]({e[1]})"
+                splitted = o.split(search)
+                if splitted[0] != '':
+                    res.append(TextNode(splitted[0], old_node.text_type))
+                res.append(TextNode(e[0], TextType.LINK, e[1]))
+                o = splitted[-1]
+            if o:
+                res.append(TextNode(o, old_node.text_type))
+    return res
+
 
 def extract_markdown_images(text):
-    return re.findall(r"!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)", text)
+    return re.findall(image_regex, text)
 
 def extract_markdown_links(text):
-    return re.findall(r"\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)", text)
+    return re.findall(link_regex, text)
 
