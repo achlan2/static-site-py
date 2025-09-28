@@ -29,8 +29,8 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
                     res.append(TextNode(s_text[i], old_node.text_type))
     return res
 
-image_regex = r"!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)"
-link_regex = r"\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)"
+image_regex = r"!\[([^\[\]]*)\]\(([^\(\)]*)\)"
+link_regex = r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)"
 
 def split_nodes_image(old_nodes):
     res = []

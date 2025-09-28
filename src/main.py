@@ -1,5 +1,6 @@
 import shutil
 import os
+from generate_page import generate_page
 
 def main():
     src = 'static'
@@ -29,6 +30,8 @@ def main():
             except Exception as e:
                 print(f"[FAILED] {src_file_path}")
                 fail_count +=1
+
+    generate_page('content/index.md', 'template.html', 'public/index.html')
 
     print("\n=== COPY SUMMARY ===")
     print(f"✅ Success: {success_count}")
