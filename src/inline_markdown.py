@@ -16,7 +16,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         t_start = 0;
         text = old_node.text
         delimiter_count = text.count(delimiter)
-        if delimiter_count%2 != 0:
+        if delimiter_count > 0 and delimiter_count%2 != 0:
             raise Exception('there is no closing delimiter!')
         s_text = text.split(delimiter)
         starting_mark = 1
