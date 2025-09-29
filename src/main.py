@@ -1,6 +1,6 @@
 import shutil
 import os
-from generate_page import generate_page
+from generate_page import generate_page, generate_pages_recursive
 
 def main():
     src = 'static'
@@ -31,7 +31,8 @@ def main():
                 print(f"[FAILED] {src_file_path}")
                 fail_count +=1
 
-    generate_page('content/index.md', 'template.html', 'public/index.html')
+    #generate_page('content/index.md', 'template.html', 'public/index.html')
+    generate_pages_recursive('content', 'template.html', 'public')
 
     print("\n=== COPY SUMMARY ===")
     print(f"✅ Success: {success_count}")
