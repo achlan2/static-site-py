@@ -9,7 +9,7 @@ def main():
     if sys.argv[0]:
         basepath = sys.argv[0]
     src = 'static'
-    destination = 'public'
+    destination = 'docs'
 
     if not os.path.exists(src) or not os.path.isdir(src):
         raise ValueError(f"Source directory '{src}' does not exists or is not a directory")
@@ -37,7 +37,7 @@ def main():
                 fail_count +=1
 
     #generate_page('content/index.md', 'template.html', 'public/index.html')
-    generate_pages_recursive('content', 'template.html', 'docs', basepath)
+    generate_pages_recursive('content', 'template.html', destination, basepath)
 
     print("\n=== COPY SUMMARY ===")
     print(f"✅ Success: {success_count}")
