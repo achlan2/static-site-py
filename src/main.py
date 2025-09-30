@@ -6,8 +6,8 @@ from generate_page import generate_page, generate_pages_recursive
 def main():
 
     basepath = '/'
-    if sys.argv[0]:
-        basepath = sys.argv[0]
+    if sys.argv[1]:
+        basepath = sys.argv[1]
     src = 'static'
     destination = 'docs'
 
@@ -36,6 +36,7 @@ def main():
                 print(f"[FAILED] {src_file_path}")
                 fail_count +=1
 
+    print(basepath)
     #generate_page('content/index.md', 'template.html', 'public/index.html')
     generate_pages_recursive('content', 'template.html', destination, basepath)
 
