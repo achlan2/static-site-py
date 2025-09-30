@@ -14,7 +14,7 @@ def generate_page(from_path, template_path, dest_path, basepath):
             template = template.replace('{{ Title }}', title)
             template = template.replace('{{ Content }}', res_html)
             template = template.replace('href="/', f'href="{basepath}')
-            template = template.replace('src="/', f'href="{basepath}')
+            template = template.replace('src="/', f'src="{basepath}')
 
             try:
 
