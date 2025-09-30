@@ -1,8 +1,13 @@
 import shutil
+import sys
 import os
 from generate_page import generate_page, generate_pages_recursive
 
 def main():
+
+    basepath = '/'
+    if sys.argv[0]:
+        basepath = sys.argv[0]
     src = 'static'
     destination = 'public'
 
@@ -32,7 +37,7 @@ def main():
                 fail_count +=1
 
     #generate_page('content/index.md', 'template.html', 'public/index.html')
-    generate_pages_recursive('content', 'template.html', 'public')
+    generate_pages_recursive('content', 'template.html', 'docs', basepath)
 
     print("\n=== COPY SUMMARY ===")
     print(f"✅ Success: {success_count}")
