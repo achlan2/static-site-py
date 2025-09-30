@@ -36,7 +36,6 @@ def main():
                 print(f"[FAILED] {src_file_path}")
                 fail_count +=1
 
-    print(basepath)
     #generate_page('content/index.md', 'template.html', 'public/index.html')
     generate_pages_recursive('content', 'template.html', destination, basepath)
 
